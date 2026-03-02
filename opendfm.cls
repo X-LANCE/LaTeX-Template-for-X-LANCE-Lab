@@ -166,6 +166,11 @@
     \setlength{\parindent}{0cm}
     \setlength{\parskip}{0.5cm}
     {
+\centering
+  \includegraphics[height=1.6cm, trim=50 50 50 50,crop]{figures/XLANCE.png}
+  \hspace{1.5cm}
+  \includegraphics[height=1.6cm, trim=30 30 30 30,crop]{figures/OpenDFM.png}
+    \vskip 0.5cm
       \setlength{\parskip}{0cm}
       \raggedright
       \nohyphens
@@ -212,26 +217,26 @@
 \fi
 
 
-%----------------------------------------------
-% 1. 首页样式（双 Logo，页码仍在底部中央）
-%----------------------------------------------
-\fancypagestyle{firstpage}{%
-  \fancyhf{}%
-  \lhead{\includegraphics[height=0.8cm]{figures/OpenDFM_cropped.pdf}}%
-  \rhead{\includegraphics[height=0.8cm]{figures/XLance.png}}%
-  \fancyfoot[C]{\thepage}%
-  \renewcommand{\headrulewidth}{0.4pt}%
-}
+% %----------------------------------------------
+% % 1. 首页样式（双 Logo，页码仍在底部中央）
+% %----------------------------------------------
+% \fancypagestyle{firstpage}{%
+%   \fancyhf{}%
+%   \lhead{\includegraphics[height=0.8cm]{figures/OpenDFM.png}}%
+%   \rhead{\includegraphics[height=0.8cm]{figures/XLANCE.png}}%
+%   \fancyfoot[C]{\thepage}%
+%   \renewcommand{\headrulewidth}{0.4pt}%
+% }
 
-%----------------------------------------------
-% 2. 正文样式 —— *先留空*，稍后再把标题填进去
-%----------------------------------------------
-\fancypagestyle{body}{%
-  \fancyhf{}%
-  % 这里暂时不写 \lhead，稍后 \maketitle 里补
-  \fancyfoot[C]{\thepage}%
-  \renewcommand{\headrulewidth}{0.4pt}%
-}
+% %----------------------------------------------
+% % 2. 正文样式 —— *先留空*，稍后再把标题填进去
+% %----------------------------------------------
+% \fancypagestyle{body}{%
+%   \fancyhf{}%
+%   % 这里暂时不写 \lhead，稍后 \maketitle 里补
+%   \fancyfoot[C]{\thepage}%
+%   \renewcommand{\headrulewidth}{0.4pt}%
+% }
 
 %------------------------------------------------
 % 3. 重写 \maketitle
@@ -241,12 +246,15 @@
 \renewcommand{\maketitle}{%
   % ----- 原来的标题页 -----
   \begingroup
+  
+  
     \oldmaketitle
     \thispagestyle{firstpage}         % 首页：双 LOGO
   \endgroup
   %
   % ----- 正文页眉/页脚 -----
   \pagestyle{body}                    % 先切换到 body 样式
+  
   \fancyhead[L]{\nouppercase{\textbf{Title}\hspace{1em}}}% 再把标题填进去
 }
 \makeatother
