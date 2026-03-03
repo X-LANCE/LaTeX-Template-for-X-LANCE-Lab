@@ -176,7 +176,28 @@
 \newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
 
 \renewcommand\date[1]{\metadata[Date]{#1}}
-\newcommand\correspondence[1]{\metadata[Correspondence]{#1}}
+
+% Equal contribution & corresponding author (footer annotations) %%%%%%%%%%%%%%
+% Use \protected\def so that these commands are NOT expanded inside the
+% \xdef used by \addtolist; they execute only when \authorlist is typeset.
+\newif\if@odl@equalcontrib
+\@odl@equalcontribfalse
+
+\protected\def\equalcontribution#1{%
+  \global\@odl@equalcontribtrue
+  #1\textsuperscript{*}%
+}
+
+\newif\if@odl@corresponding
+\@odl@correspondingfalse
+\newcommand{\@odl@corr@email}{}
+
+% Usage: \correspondence{email}{Author Name}
+\protected\def\correspondence#1#2{%
+  \global\@odl@correspondingtrue
+  \gdef\@odl@corr@email{#1}%
+  #2\textsuperscript{\dag}%
+}
 
 % \renewcommand{\title}[1]{\newcommand{\titlelist}{{\Large\bfseries #1}}}
 \makeatletter
@@ -249,6 +270,14 @@
       \affiliationlist\par
       %
       \begin{center}\contributionlist\end{center}
+      %
+      {\small
+        \if@odl@equalcontrib\textsuperscript{*}Equal Contribution\fi
+        \if@odl@corresponding
+          \if@odl@equalcontrib\hspace{1em}\fi
+          \textsuperscript{\dag}Correspondence to: \texttt{\@odl@corr@email}%
+        \fi
+      \par}
     }
     %
     \abstractlist 
@@ -262,7 +291,7 @@
     }
     %
     \vskip 0.3cm
-    {\color{odlfg}%
+    {\small\color{odlfg}%
       \setlength{\parskip}{0.05cm}%
       \ifdefempty{\@odl@publishdate}{}{%
         \textbf{Publish Date:} \@odl@publishdate
