@@ -1,6 +1,9 @@
-\documentclass{xlance/xlance}
+\documentclass[]{xlance/xlance}
+% Uncomment 
+% \documentclass[opendfm]{xlance/xlance}
 
-% Content-specific packages (not loaded by xlance.cls)
+%%%%% Content-specific packages (not loaded by xlance.cls)
+
 \usepackage{tikz}
 \usepackage[edges]{forest}
 \usetikzlibrary{mindmap, trees, shadows, arrows.meta}
@@ -14,18 +17,20 @@
 % ]{biblatex}
 % \addbibresource{ref.bib}
 
+%%%%%% End of Content-specific packages
+
 \title{A LaTeX Template for X-LANCE Lab}
 
- \small{
- \author[1]{\equalcontribution{Author 1}}
- \author[1]{\equalcontribution{Author 2}}
- \author[2]{\correspondence{author3@example.com}{Author 3}}
- }
+\small{
+\author[1]{\equalcontribution{Author 1}}
+\author[1]{\equalcontribution{Author 2}}
+\author[2]{\correspondence{author3@example.com}{Author 3}}
+}
 
- \small{
- \affiliation[1]{Affiliation 1}
- \affiliation[2]{Affiliation 2}
- }
+\small{
+\affiliation[1]{Affiliation 1}
+\affiliation[2]{Affiliation 2}
+}
 
 %\contribution{
 %   \centering Full author list in Contributions
@@ -45,7 +50,7 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 
 \begin{document}
 \publishdate{2026.03.02}
-%\revisedate{2026.03.02}
+\revisedate{2026.03.03}
 \maketitle
 
 \begin{figure}[H]
@@ -59,11 +64,24 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 \tableofcontents
 \clearpage
 
-\section{Introduction} \label{section:intro}
-Transformer \cite{vaswani2017attention} ...
+
+\section{Introduction}
+\label{section:intro}
+
+Welcome to SJTU X-LANCE Lab!
+
+The SJTU Cross Media Language Intelligence Lab (X-LANCE)~\cite{xlance} at Shanghai Jiao Tong University was established in 2012. Originally known as the “SpeechLab”, it has evolved over the years to become the “Cross-Modal Language Intelligence Lab”, encompassing core research areas in audiovisual and language information processing. Currently, the lab’s faculty includes one professor, four associate professors, one assistant professor, and one research assistant, along with over twenty doctoral students and near forty master’s students. It also includes over thirty undergraduate students from programs such as ACM class, AI class, IEEE class, the School of Electronic Information and Electrical Engineering, SJTU Paris Elite Institute of Technology (SPEIT), and the UM-SJTU Joint Institute.
+
+The lab has received numerous national and corporate project supports, including the National Key R\&D Program and the Excellent Young Scientists Fund of the National Natural Science Foundation of China. It has a deep collaboration with AISpeech Co., Ltd., establishing the “SJTU-AISpeech Joint Lab for Intelligent Human-Computer Interaction.” The lab has access to rich data resources and extensive computing resources, including hundreds of GPU cards like H800, A800, and A10, making it one of the few AI labs in the world capable of conducting industrial-scale data analysis and research.
+
+X-LANCE Lab is dedicated to conducting world-class technical research that can change the world. The lab’s academic credo is: \textit{To change the world, you must be an engineer! An outstanding engineer must be an excellent scientist who deeply understands the world!}
+
+Now let's talk about Transformer~\cite{vaswani2017attention} ...
 
 % ===== Code Listing Examples =====
-\section{Code Listing Examples} \label{section:listings}
+
+\section{Code Listing Examples}
+\label{section:listings}
 
 \subsection{Python}
 
@@ -72,56 +90,56 @@ import torch
 import torch.nn as nn
 
 class TransformerBlock(nn.Module):
-    """A single Transformer encoder block."""
+"""A single Transformer encoder block."""
 
-    def __init__(self, d_model: int = 512, n_heads: int = 8):
-        super().__init__()
-        self.attn = nn.MultiheadAttention(d_model, n_heads)
-        self.norm = nn.LayerNorm(d_model)
-        self.ffn = nn.Sequential(
-            nn.Linear(d_model, d_model * 4),
-            nn.GELU(),
-            nn.Linear(d_model * 4, d_model),
-        )
+def __init__(self, d_model: int = 512, n_heads: int = 8):
+    super().__init__()
+    self.attn = nn.MultiheadAttention(d_model, n_heads)
+    self.norm = nn.LayerNorm(d_model)
+    self.ffn = nn.Sequential(
+        nn.Linear(d_model, d_model * 4),
+        nn.GELU(),
+        nn.Linear(d_model * 4, d_model),
+    )
 
-    def forward(self, x):
-        # Self-attention with residual connection
-        attn_out, _ = self.attn(x, x, x)
-        x = self.norm(x + attn_out)
-        return x + self.ffn(x)
+def forward(self, x):
+    # Self-attention with residual connection
+    attn_out, _ = self.attn(x, x, x)
+    x = self.norm(x + attn_out)
+    return x + self.ffn(x)
 
 if __name__ == "__main__":
-    model = TransformerBlock()
-    dummy = torch.randn(10, 32, 512)  # (seq_len, batch, d_model)
-    output = model(dummy)
-    print(f"Output shape: {output.shape}")
+model = TransformerBlock()
+dummy = torch.randn(10, 32, 512)  # (seq_len, batch, d_model)
+output = model(dummy)
+print(f"Output shape: {output.shape}")
 \end{lstlisting}
 
 \subsection{JSON}
 
 \begin{lstlisting}[style=json, caption={A JSON configuration example}]
 {
-    "model": {
-        "name": "transformer-base",
-        "d_model": 512,
-        "n_heads": 8,
-        "n_layers": 6,
-        "dropout": 0.1,
-        "use_flash_attention": true
-    },
-    "training": {
-        "learning_rate": 3e-4,
-        "batch_size": 64,
-        "max_epochs": 100,
-        "warmup_steps": 4000,
-        "gradient_clip": null
-    },
-    "data": {
-        "train_path": "/data/train.jsonl",
-        "valid_path": "/data/valid.jsonl",
-        "max_seq_len": 2048,
-        "vocab_size": 32000
-    }
+"model": {
+    "name": "transformer-base",
+    "d_model": 512,
+    "n_heads": 8,
+    "n_layers": 6,
+    "dropout": 0.1,
+    "use_flash_attention": true
+},
+"training": {
+    "learning_rate": 3e-4,
+    "batch_size": 64,
+    "max_epochs": 100,
+    "warmup_steps": 4000,
+    "gradient_clip": null
+},
+"data": {
+    "train_path": "/data/train.jsonl",
+    "valid_path": "/data/valid.jsonl",
+    "max_seq_len": 2048,
+    "vocab_size": 32000
+}
 }
 \end{lstlisting}
 
@@ -143,40 +161,42 @@ pip install transformers datasets accelerate
 
 # Launch distributed training
 torchrun --nproc_per_node=4 train.py \
-    --model_name transformer-base \
-    --batch_size 64 \
-    --learning_rate 3e-4 \
-    --max_epochs 100
+--model_name transformer-base \
+--batch_size 64 \
+--learning_rate 3e-4 \
+--max_epochs 100
 \end{lstlisting}
 
 \subsection{Prompt (Plain Text)}
 
 \begin{promptbox}[System Prompt]
-\ttfamily\small
-You are a helpful AI research assistant specializing in natural language processing.
-When answering questions, follow these guidelines:
+    \ttfamily\small
+    You are a helpful AI research assistant specializing in natural language processing.
+    When answering questions, follow these guidelines:
 
-1. Provide accurate, well-cited information.
-2. If you are unsure, clearly state your uncertainty.
-3. Use formal academic language when appropriate.
-4. Include relevant equations using LaTeX notation.
+    1. Provide accurate, well-cited information.
+    2. If you are unsure, clearly state your uncertainty.
+    3. Use formal academic language when appropriate.
+    4. Include relevant equations using LaTeX notation.
 \end{promptbox}
 
 \begin{promptbox}[User $\rightarrow$ Assistant]
-\ttfamily\small
-\textbf{User:} Explain the attention mechanism in Transformers. Include the mathematical formulation and discuss its computational complexity.
+    \ttfamily\small
+    \textbf{User:} Explain the attention mechanism in Transformers. Include the mathematical formulation and discuss its computational complexity.
 
-\vspace{0.3em}
-\textbf{Assistant:} The scaled dot-product attention is defined as:
+    \vspace{0.3em}
+    \textbf{Assistant:} The scaled dot-product attention is defined as:
 
-$$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$
+    $$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$
 
-where $Q$, $K$, $V$ are the query, key, and value matrices respectively, and $d_k$ is the dimension of the keys. The computational complexity is $O(n^2 \cdot d)$ where $n$ is the sequence length...
+    where $Q$, $K$, $V$ are the query, key, and value matrices respectively, and $d_k$ is the dimension of the keys. The computational complexity is $O(n^2 \cdot d)$ where $n$ is the sequence length...
 \end{promptbox}
 
 
 % ===== Template Features Overview =====
-\section{Template Overview} \label{section:overview}
+
+\section{Template Overview}
+\label{section:overview}
 
 The \texttt{opendfm} class is a \LaTeX{} document template jointly maintained by X-LANCE Lab and OpenDFM, designed for technical reports, preprints, and academic papers. It is built on the standard \texttt{article} class and ships with the following built-in features:
 
@@ -190,7 +210,9 @@ The \texttt{opendfm} class is a \LaTeX{} document template jointly maintained by
 \end{itemize}
 
 % ===== Mathematical Equations =====
-\section{Mathematical Equations} \label{section:math}
+
+\section{Mathematical Equations}
+\label{section:math}
 
 \subsection{Inline Equations}
 
@@ -248,60 +270,60 @@ A $3 \times 3$ rotation matrix about the $z$-axis is:
     \label{eq:rotation}
 \end{equation}
 
-Cross-references are produced with \verb|\cref{}|, \eg \cref{eq:attention,eq:multihead,eq:relu,eq:rotation}.
+Cross-references are produced with \verb|\Cref{}|, \eg \Cref{eq:attention,eq:multihead,eq:relu,eq:rotation}.
 
 % ===== Figures =====
-\section{Figures} \label{section:figures}
+
+\section{Figures} 
+\label{section:figures}
 
 \subsection{Single Figure}
 
-Figures are inserted via \verb|\includegraphics| inside a \texttt{figure} float. While the actual image is not yet available, a gray placeholder block generated with \verb|\rule| serves as a stand-in, as shown in \cref{fig:placeholder}.
+Figures are inserted via \verb|\includegraphics| inside a \texttt{figure} float. While the actual image is not yet available, a gray placeholder block generated with \verb|\rule| serves as a stand-in, as shown in \Cref{fig:placeholder}.
 
 \begin{figure}[H]
     \centering
-    \rule{0.72\linewidth}{5.5cm}
+    \placeholder[0.72\linewidth]{5.5cm}
     \caption{A placeholder figure.}
     \label{fig:placeholder}
 \end{figure}
 
 \subsection{Sub-figures}
 
-When multiple related images need side-by-side comparison, use the \texttt{subfigure} environment from the \texttt{subcaption} package (already loaded by the class), as demonstrated in \cref{fig:subfig}.
+When multiple related images need side-by-side comparison, use the \texttt{subfigure} environment from the \texttt{subcaption} package (already loaded by the class), as demonstrated in \Cref{fig:subfig}.
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.46\linewidth}
         \centering
-        \rule{\linewidth}{4cm}
+        \placeholder{\linewidth}
         \caption{Visualization of Method~A}
         \label{fig:subfig_a}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.46\linewidth}
         \centering
-        \rule{\linewidth}{4cm}
+        \placeholder{\linewidth}
         \caption{Visualization of Method~B}
         \label{fig:subfig_b}
     \end{subfigure}
     \caption{Side-by-side comparison of two methods using the \texttt{subfigure}
-             environment. The overall caption appears at the bottom; sub-captions
-             are labeled (a) and (b) automatically.}
+    environment. The overall caption appears at the bottom; sub-captions
+    are labeled (a) and (b) automatically.}
     \label{fig:subfig}
 \end{figure}
 
 % ===== Tables =====
-\section{Tables} \label{section:tables}
+
+\section{Tables}
+\label{section:tables}
 
 \subsection{Standard Booktabs Table}
 
-The \texttt{booktabs} package (loaded by the class) provides three-rule academic tables: \verb|\toprule|, \verb|\midrule|, and \verb|\bottomrule|. Vertical lines should be avoided. \cref{tab:model_perf} reports benchmark results for several language models (all numbers are \emph{mock data} for layout demonstration only).
+The \texttt{booktabs} package (loaded by the class) provides three-rule academic tables: \verb|\toprule|, \verb|\midrule|, and \verb|\bottomrule|. Vertical lines should be avoided. \Cref{tab:model_perf} reports benchmark results for several language models (all numbers are \emph{mock data} for layout demonstration only).
 
 \begin{table}[H]
     \centering
-    \caption{Performance comparison of language models on three benchmarks (\%, $\uparrow$ higher is better).
-             \textbf{Bold} denotes the best result per column; \underline{underline} the runner-up.
-             All numbers are mock data.}
-    \label{tab:model_perf}
     \begin{tabular}{lcccccc}
         \toprule
         \multirow{2.5}{*}{\textbf{Model}} & % each \cmidrule with take 0.5 row height
@@ -310,42 +332,46 @@ The \texttt{booktabs} package (loaded by the class) provides three-rule academic
         \multicolumn{2}{c}{\textbf{QA}} &
         \textbf{Coding} \\
         \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-7}
-        & & GSM8K & MATH & TriviaQA & NQ & HumanEval \\
+        &            & GSM8K            & MATH             & TriviaQA         & NQ               & HumanEval        \\
         \midrule
-        GPT-4o           & $\sim$200B & \textbf{96.2} & \textbf{73.4} & \textbf{91.3} & \textbf{68.5} & \textbf{87.1} \\
-        Claude 3.5 S     & $\sim$175B & \underline{95.0} & \underline{71.8} & \underline{89.7} & \underline{66.2} & \underline{84.6} \\
-        Llama-3.1-70B    & 70B  & 83.4 & 51.9 & 82.1 & 58.4 & 72.3 \\
-        Qwen2.5-72B      & 72B  & 91.6 & 65.7 & 86.3 & 63.1 & 79.4 \\
-        Mistral-8$\times$7B & 46.7B & 74.8 & 43.2 & 78.5 & 51.7 & 65.9 \\
+        GPT-4o              & $\sim$200B & \textbf{96.2}    & \textbf{73.4}    & \textbf{91.3}    & \textbf{68.5}    & \textbf{87.1}    \\
+        Claude 3.5 S        & $\sim$175B & \underline{95.0} & \underline{71.8} & \underline{89.7} & \underline{66.2} & \underline{84.6} \\
+        Llama-3.1-70B       & 70B        & 83.4             & 51.9             & 82.1             & 58.4             & 72.3             \\
+        Qwen2.5-72B         & 72B        & 91.6             & 65.7             & 86.3             & 63.1             & 79.4             \\
+        Mistral-8$\times$7B & 46.7B      & 74.8             & 43.2             & 78.5             & 51.7             & 65.9             \\
         \midrule
-        \textit{Ours}    & 7B   & 88.3 & 60.1 & 84.7 & 61.8 & 76.0 \\
+        \textit{Ours}       & 7B         & 88.3             & 60.1             & 84.7             & 61.8             & 76.0             \\
         \bottomrule
     \end{tabular}
+    \caption{Performance comparison of language models on three benchmarks (\%, $\uparrow$ higher is better).
+    \textbf{Bold} denotes the best result per column; \underline{underline} the runner-up.
+    All numbers are mock data.}
+    \label{tab:model_perf}
 \end{table}
 
 \subsection{Colored Table (Ablation Study)}
 
-Row highlighting with \verb|\rowcolor| (from \texttt{xcolor} with the \texttt{table} option) is useful for ablation tables. \cref{tab:ablation} illustrates this pattern with mock data.
+Row highlighting with \verb|\rowcolor| (from \texttt{xcolor} with the \texttt{table} option) is useful for ablation tables. \Cref{tab:ablation} illustrates this pattern with mock data.
 
 \begin{table}[H]
     \centering
-    \caption{Ablation study results (mock data). Each row removes one component to
-             quantify its contribution to the full model.}
-    \label{tab:ablation}
     \begin{tabular}{lcccc}
         \toprule
-        \textbf{Configuration} & \textbf{Acc.\,$\uparrow$} & \textbf{F1\,$\uparrow$} & \textbf{BLEU\,$\uparrow$} & \textbf{Latency\,$\downarrow$} \\
+        \textbf{Configuration}        & \textbf{Acc.\,$\uparrow$} & \textbf{F1\,$\uparrow$} & \textbf{BLEU\,$\uparrow$} & \textbf{Latency\,$\downarrow$} \\
         \midrule
         \rowcolor{hidden-blue!40}
-        Full model                        & \textbf{84.7} & \textbf{82.3} & \textbf{38.6} & 142\,ms \\
-        $-$ Cross-modal attention         & 81.2 & 78.9 & 35.1 & 138\,ms \\
-        $-$ Pretrained initialization     & 79.5 & 76.4 & 33.8 & 141\,ms \\
-        $-$ Data augmentation             & 82.1 & 79.7 & 36.4 & 143\,ms \\
-        $-$ Attn.\,\& augmentation        & 76.8 & 74.2 & 31.0 & 137\,ms \\
+        Full model                    & \textbf{84.7}             & \textbf{82.3}           & \textbf{38.6}             & 142\,ms                        \\
+        $-$ Cross-modal attention     & 81.2                      & 78.9                    & 35.1                      & 138\,ms                        \\
+        $-$ Pretrained initialization & 79.5                      & 76.4                    & 33.8                      & 141\,ms                        \\
+        $-$ Data augmentation         & 82.1                      & 79.7                    & 36.4                      & 143\,ms                        \\
+        $-$ Attn.\,\& augmentation    & 76.8                      & 74.2                    & 31.0                      & 137\,ms                        \\
         \rowcolor{hidden-orange!40}
-        Vanilla Transformer baseline      & 72.3 & 69.8 & 27.5 & \textbf{128\,ms} \\
+        Vanilla Transformer baseline  & 72.3                      & 69.8                    & 27.5                      & \textbf{128\,ms}               \\
         \bottomrule
     \end{tabular}
+    \caption{Ablation study results (mock data). Each row removes one component to
+    quantify its contribution to the full model.}
+    \label{tab:ablation}
 \end{table}
 
 \newpage
@@ -355,7 +381,11 @@ Row highlighting with \verb|\rowcolor| (from \texttt{xcolor} with the \texttt{ta
 
 \newpage
 \appendix
+
+
 \section{This is an Appendix Section}
+
 \subsection{This is an Appendix Subsection}
+
 \subsubsection{This is an Appendix Subsubsection}
 \end{document}
