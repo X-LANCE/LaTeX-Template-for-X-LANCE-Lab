@@ -1,6 +1,6 @@
-\documentclass{opendfm}
+\documentclass{xlance/xlance}
 
-% Content-specific packages (not loaded by opendfm.cls)
+% Content-specific packages (not loaded by xlance.cls)
 \usepackage{tikz}
 \usepackage[edges]{forest}
 \usetikzlibrary{mindmap, trees, shadows, arrows.meta}
@@ -14,7 +14,7 @@
 % ]{biblatex}
 % \addbibresource{ref.bib}
 
-\title{A LaTeX Template for OpenDFM of X-LANCE Lab}
+\title{A LaTeX Template for X-LANCE Lab}
 
  \small{
  \author[1]{\equalcontribution{Author 1}}
@@ -39,7 +39,7 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 \metadatainfo{
     \small\makebox[\linewidth][c]{
         \github~\href{https://github.com}{\textbf{Code}} \quad
-        \huggingface~\href{https://huggingface.co}{\textbf{Dataset}}
+        \huggingface~\href{https://huggingface.co}{\textbf{Model/Dataset}}
     }
 }
 
@@ -50,9 +50,9 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 
 \begin{figure}[H]
     \centering
-    \rule{0.95\linewidth}{7cm}
-    \caption{A placeholder figure.}
-    \label{fig:placeholder}
+    \includegraphics[width=\linewidth, trim=0 150 0 180, clip]{figures/example_1.jpg} % The four numbers provided respectively represent the values trimmed from the left, bottom, right, and top.
+    \caption{A teaser figure. The group photo was taken on October 8, 2025, during the 13th Family Day of the X-LANCE Lab.}
+    \label{fig:teaser}
 \end{figure}
 
 \clearpage
@@ -304,8 +304,8 @@ The \texttt{booktabs} package (loaded by the class) provides three-rule academic
     \label{tab:model_perf}
     \begin{tabular}{lcccccc}
         \toprule
-        \multirow{2}{*}{\textbf{Model}} &
-        \multirow{2}{*}{\textbf{Params}} &
+        \multirow{2.5}{*}{\textbf{Model}} & % each \cmidrule with take 0.5 row height
+        \multirow{2.5}{*}{\textbf{Params}} &
         \multicolumn{2}{c}{\textbf{Reasoning}} &
         \multicolumn{2}{c}{\textbf{QA}} &
         \textbf{Coding} \\
@@ -348,9 +348,10 @@ Row highlighting with \verb|\rowcolor| (from \texttt{xcolor} with the \texttt{ta
     \end{tabular}
 \end{table}
 
-\bibliographystyle{IEEEtran2}
+\newpage
+\bibliographystyle{xlance/IEEEtran2}
 \setcitestyle{numbers}
-\bibliography{ref}
+\bibliography{xlance/venues,reference}
 
 \newpage
 \appendix
