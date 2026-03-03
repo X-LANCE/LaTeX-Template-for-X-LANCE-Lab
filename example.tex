@@ -1,21 +1,13 @@
 \documentclass[]{xlance/xlance}
-% Uncomment 
+% Uncomment the following line to switch to the opendfm style
 % \documentclass[opendfm]{xlance/xlance}
 
-%%%%% Content-specific packages (not loaded by xlance.cls)
+%%%%% Content-specific packages
 
 \usepackage{tikz}
 \usepackage[edges]{forest}
 \usetikzlibrary{mindmap, trees, shadows, arrows.meta}
 \useforestlibrary{edges}
-
-% \usepackage[
-%   backend=biber,
-%   style=numeric,
-%   maxnames=3,
-%   minnames=1
-% ]{biblatex}
-% \addbibresource{ref.bib}
 
 %%%%%% End of Content-specific packages
 
@@ -50,7 +42,7 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 
 \begin{document}
 \publishdate{2026.03.02}
-\revisedate{2026.03.03}
+\revisedate{2026.03.04}
 \maketitle
 
 \begin{figure}[H]
@@ -274,12 +266,13 @@ Cross-references are produced with \verb|\Cref{}|, \eg \Cref{eq:attention,eq:mul
 
 % ===== Figures =====
 
-\section{Figures} 
+
+\section{Figures}
 \label{section:figures}
 
 \subsection{Single Figure}
 
-Figures are inserted via \verb|\includegraphics| inside a \texttt{figure} float. While the actual image is not yet available, a gray placeholder block generated with \verb|\rule| serves as a stand-in, as shown in \Cref{fig:placeholder}.
+Figures are inserted via \verb|\includegraphics| inside a \texttt{figure} float. While the actual image is not yet available, a gray placeholder block generated with \verb|\placeholder[width=\linewidth]{height}| serves as a stand-in, as shown in \Cref{fig:placeholder}.
 
 \begin{figure}[H]
     \centering
@@ -296,15 +289,15 @@ When multiple related images need side-by-side comparison, use the \texttt{subfi
     \centering
     \begin{subfigure}[b]{0.46\linewidth}
         \centering
-        \placeholder{\linewidth}
-        \caption{Visualization of Method~A}
+        \includegraphics[width=\linewidth, trim=0 0 0 0, clip]{figures/example_2.jpg}
+        \caption{Photo with 2024 Turing Award winner Richard Sutton and his students}
         \label{fig:subfig_a}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.46\linewidth}
         \centering
-        \placeholder{\linewidth}
-        \caption{Visualization of Method~B}
+        \includegraphics[width=\linewidth, trim=0 0 0 0, clip]{figures/example_3.jpg}
+        \caption{Turing Award winner Yann LeCun visits the X-LANCE Lab in 2018}
         \label{fig:subfig_b}
     \end{subfigure}
     \caption{Side-by-side comparison of two methods using the \texttt{subfigure}
@@ -384,6 +377,7 @@ Row highlighting with \verb|\rowcolor| (from \texttt{xcolor} with the \texttt{ta
 
 
 \section{This is an Appendix Section}
+\label{appendix:example}
 
 \subsection{This is an Appendix Subsection}
 

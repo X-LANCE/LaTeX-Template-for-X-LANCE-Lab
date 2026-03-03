@@ -7,7 +7,7 @@
 % Class declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{xlance}[2026/03/03 X-LANCE Lab Template]
+\ProvidesClass{xlance}[]
 
 % ---- Class options ----------------------------------------------------------
 \newif\if@odl@opendfm
@@ -31,7 +31,7 @@
 \RequirePackage[latin, english]{babel}
 \RequirePackage{lipsum}
 \RequirePackage{etoolbox}
-%\DisableLigatures[f]{family=sf*} 
+%\DisableLigatures[f]{family=sf*}
 
 % Palatino font
 \RequirePackage[T1]{fontenc}
