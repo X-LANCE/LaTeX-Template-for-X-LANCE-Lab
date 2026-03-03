@@ -1,15 +1,24 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style for X-LANCE pre-prints
-% Version: 1.0
+% Version: 0.1.2
 % Update date: 20260303
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Class declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{xlance}
+\ProvidesClass{xlance}[]
+
+% ---- Class options ----------------------------------------------------------
+\newif\if@odl@opendfm
+\@odl@opendfmfalse
+\DeclareOption{opendfm}{\@odl@opendfmtrue}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+% -----------------------------------------------------------------------------
+
 \PassOptionsToPackage{table,svgnames}{xcolor}
-\LoadClassWithOptions{article}
+\LoadClass{article}
 
 % Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -22,7 +31,7 @@
 \RequirePackage[latin, english]{babel}
 \RequirePackage{lipsum}
 \RequirePackage{etoolbox}
-%\DisableLigatures[f]{family=sf*} 
+%\DisableLigatures[f]{family=sf*}
 
 % Palatino font
 \RequirePackage[T1]{fontenc}
@@ -71,9 +80,28 @@
 
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{xcolor}
-\definecolor{odlblue}{HTML}{1B61A7}
+% Theme colors: 5 shades from darkest (theme1) to lightest (theme5) %%%%%%%%%%
+
+\if@odl@opendfm
+  % Purple-blue theme — OpenDFM mode
+  \definecolor{theme1}{HTML}{1A2175}
+  \definecolor{theme2}{HTML}{2B37C2}
+  \definecolor{theme3}{HTML}{3746F5}
+  \definecolor{theme4}{HTML}{C1C5F5}
+  \definecolor{theme5}{HTML}{E2E3F5}
+\else
+  % Red theme — X-LANCE only mode
+  \definecolor{theme1}{HTML}{7B1113}
+  \definecolor{theme2}{HTML}{B5192C}
+  \definecolor{theme3}{HTML}{D64855}
+  \definecolor{theme4}{HTML}{EFA0A7}
+  \definecolor{theme5}{HTML}{FDF0F1}
+\fi
+
+% Semantic aliases (backward-compatible names map to the active theme)
+\colorlet{odlblue}{theme3}
+\colorlet{odlbg}{theme5}
 \definecolor{odlfg}{HTML}{1C2B33}
-\definecolor{odlbg}{HTML}{FFF5F5}
 
 % Listing colors
 \definecolor{odl@codegreen}{rgb}{0,0.5,0}
@@ -235,7 +263,9 @@
 
 \makeatletter
 \newcommand{\mymaketitle}{%
-  \tcbset{enhanced,frame hidden}
+  \tcbset{enhanced}
+  \tcbset{colframe=theme2}
+  \tcbset{boxrule=1pt}
   \tcbset{left=0.5cm}
   \tcbset{right=0.5cm}
   \tcbset{top=0.5cm}
@@ -250,9 +280,13 @@
     \setlength{\parskip}{0.5cm}
     {
 \centering
-  \includegraphics[height=1.6cm, trim=50 50 50 50, clip]{xlance/assets/logos/XLANCE.png}
-  \hspace{1.5cm}
-  \includegraphics[height=1.6cm, trim=30 30 30 30, clip]{xlance/assets/logos/OpenDFM.png}
+  \if@odl@opendfm
+    \includegraphics[height=1.6cm, trim=50 50 50 50, clip]{xlance/assets/logos/XLANCE.png}%
+    \hspace{1.5cm}%
+    \includegraphics[height=1.6cm, trim=30 30 30 30, clip]{xlance/assets/logos/OpenDFM.png}%
+  \else
+    \includegraphics[height=1.6cm, trim=50 50 50 50, clip]{xlance/assets/logos/XLANCE.png}%
+  \fi
     \vskip 0.5cm
       \setlength{\parskip}{0cm}
       \raggedright
@@ -476,6 +510,25 @@
   colback=odlbg,
   borderline west={2pt}{0pt}{odlblue},
   borderline east={2pt}{0pt}{odlblue},
+}
+
+% Figure placeholder (Overleaf-style crossed box) %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Usage: \placeholder[width]{height}  — default width is \linewidth
+\RequirePackage{tikz}
+\newcommand{\placeholder}[2][\linewidth]{%
+  \begin{tikzpicture}
+    \node[
+      draw=gray!50,
+      fill=gray!8,
+      line width=0.6pt,
+      minimum width=#1,
+      minimum height=#2,
+      inner sep=0pt
+    ] (box) {};
+    \draw[gray!40, line width=0.5pt] (box.north west) -- (box.south east);
+    \draw[gray!40, line width=0.5pt] (box.north east) -- (box.south west);
+    \node[gray, font=\small\itshape] at (box.center) {Figure};
+  \end{tikzpicture}%
 }
 
 % Convenience commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
