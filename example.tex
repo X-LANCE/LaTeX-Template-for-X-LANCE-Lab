@@ -1,15 +1,22 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template for X-LANCE pre-prints
+% Version: 0.2.2
+% Update date: 20260304
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass[]{xlance/xlance}
 % Uncomment the following line to switch to the opendfm style
+% 取消下一行注释以切换为 OpenDFM 样式
 % \documentclass[opendfm]{xlance/xlance}
 
-%%%%% Content-specific packages
+% ===== Content-specific packages / 内容相关宏包 =====
 
 \usepackage{tikz}
 \usepackage[edges]{forest}
 \usetikzlibrary{mindmap, trees, shadows, arrows.meta}
 \useforestlibrary{edges}
 
-%%%%%% End of Content-specific packages
+% ===== End of Content-specific packages / 内容相关宏包结束 =====
 
 \title{A LaTeX Template for X-LANCE Lab}
 
@@ -24,6 +31,8 @@
 \affiliation[2]{Affiliation 2}
 }
 
+% Uncomment to show a full author list in the contribution section
+% 取消注释以在贡献部分显示完整作者列表
 %\contribution{
 %   \centering Full author list in Contributions
 % }
@@ -32,11 +41,13 @@
 This is a \LaTeX{} document template designed for technical reports, preprints produced by the OpenDFM team at X-LANCE Lab, Shanghai Jiao Tong University. The template is built on top of the standard \texttt{article} class and provides a cohesive set of typographic defaults, including Palatino body text, a unified color theme, and a carefully styled title box with author affiliations and metadata links. It ships with four built-in code-listing styles (Python, JSON, Bash, and plain-text prompt), a \texttt{promptbox} environment tailored for LLM-style dialogues, and full support for AMS math environments, \texttt{booktabs} tables, and \texttt{subcaption} sub-figures. References are managed via \texttt{natbib} with an IEEE-compatible bibliography style. This companion document serves as both a user guide and a living example: every feature described herein---equations, figures, tables, code blocks, colored boxes, and cross-references---is demonstrated in place so that authors can copy and adapt the source directly.
 }
 
+% Uncomment to show a date line / 取消注释以显示日期
 % \date{\today}
 \metadatainfo{
     \small\makebox[\linewidth][c]{
-        \github~\href{https://github.com}{\textbf{Code}} \quad
-        \huggingface~\href{https://huggingface.co}{\textbf{Model/Dataset}}
+        \href{https://github.com/X-LANCE}{\github~\textbf{Code}} \quad
+        \href{https://huggingface.co/X-LANCE}{\huggingface~\textbf{Model/Dataset}}\quad
+        \href{https://x-lance.sjtu.edu.cn/}{\web~\textbf{Homepage}}
     }
 }
 
@@ -47,7 +58,7 @@ This is a \LaTeX{} document template designed for technical reports, preprints p
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth, trim=0 150 0 180, clip]{figures/example_1.jpg} % The four numbers provided respectively represent the values trimmed from the left, bottom, right, and top.
+    \includegraphics[width=\linewidth, trim=0 150 0 180, clip]{figures/example_1.jpg} % The four numbers represent trim from left, bottom, right, top / 四个数值分别为左、下、右、上的裁切量
     \caption{A teaser figure. The group photo was taken on October 8, 2025, during the 13th Family Day of the X-LANCE Lab.}
     \label{fig:teaser}
 \end{figure}
@@ -70,14 +81,14 @@ X-LANCE Lab is dedicated to conducting world-class technical research that can c
 
 Now let's talk about Transformer~\cite{vaswani2017attention} ...
 
-% ===== Code Listing Examples =====
+% ===== Code Listing Examples / 代码清单示例 =====
 
 \section{Code Listing Examples}
 \label{section:listings}
 
 \subsection{Python}
 
-\begin{lstlisting}[style=python, caption={A simple Python example}]
+\begin{lstlisting}[style=python, caption={A Python code example}]
 import torch
 import torch.nn as nn
 
@@ -111,27 +122,28 @@ print(f"Output shape: {output.shape}")
 
 \begin{lstlisting}[style=json, caption={A JSON configuration example}]
 {
-"model": {
-    "name": "transformer-base",
-    "d_model": 512,
-    "n_heads": 8,
-    "n_layers": 6,
-    "dropout": 0.1,
-    "use_flash_attention": true
-},
-"training": {
-    "learning_rate": 3e-4,
-    "batch_size": 64,
-    "max_epochs": 100,
-    "warmup_steps": 4000,
-    "gradient_clip": null
-},
-"data": {
-    "train_path": "/data/train.jsonl",
-    "valid_path": "/data/valid.jsonl",
-    "max_seq_len": 2048,
-    "vocab_size": 32000
-}
+    "model": {
+        "name": "transformer-base",
+        "d_model": 512,
+        "n_heads": 8,
+        "n_layers": 6,
+        "dropout": 0.1,
+        "use_flash_attention": true
+    },
+    "training": {
+        "learning_rate": 3e-4,
+        "batch_size": 64,
+        "max_epochs": 100,
+        "warmup_steps": 4000,
+        "gradient_clip": null
+    },
+    // JSON do not support comment actually
+    "data": {
+        "train_path": "/data/train.jsonl",
+        "valid_path": "/data/valid.jsonl",
+        "max_seq_len": 2048,
+        "vocab_size": 32000
+    }
 }
 \end{lstlisting}
 
@@ -157,12 +169,28 @@ torchrun --nproc_per_node=4 train.py \
 --batch_size 64 \
 --learning_rate 3e-4 \
 --max_epochs 100
+
+echo "Task Complete"
 \end{lstlisting}
 
-\subsection{Prompt (Plain Text)}
+\subsection{Plain Text}
 
+\subsubsection{Listing}
+
+\begin{lstlisting}[style=plain, caption={A plain text example}]
+You are a helpful AI research assistant specializing in natural language processing.
+When answering questions, follow these guidelines:
+
+1. Provide accurate, well-cited information.
+2. If you are unsure, clearly state your uncertainty.
+3. Use formal academic language when appropriate.
+4. Include relevant equations using LaTeX notation.
+\end{lstlisting}
+
+\subsubsection{Colorbox}
+
+\setboxscheme{themeAcolor}
 \begin{promptbox}[System Prompt]
-    \ttfamily\small
     You are a helpful AI research assistant specializing in natural language processing.
     When answering questions, follow these guidelines:
 
@@ -172,8 +200,8 @@ torchrun --nproc_per_node=4 train.py \
     4. Include relevant equations using LaTeX notation.
 \end{promptbox}
 
+\setboxscheme{themeBcolor}
 \begin{promptbox}[User $\rightarrow$ Assistant]
-    \ttfamily\small
     \textbf{User:} Explain the attention mechanism in Transformers. Include the mathematical formulation and discuss its computational complexity.
 
     \vspace{0.3em}
@@ -184,8 +212,11 @@ torchrun --nproc_per_node=4 train.py \
     where $Q$, $K$, $V$ are the query, key, and value matrices respectively, and $d_k$ is the dimension of the keys. The computational complexity is $O(n^2 \cdot d)$ where $n$ is the sequence length...
 \end{promptbox}
 
+\begin{notebox}[Take Home Message]
+    You can either use \verb|\promptbox| or \verb|\lstlisting| to display prompt.
+\end{notebox}
 
-% ===== Template Features Overview =====
+% ===== Template Features Overview / 模板功能概览 =====
 
 \section{Template Overview}
 \label{section:overview}
@@ -194,14 +225,14 @@ The \texttt{opendfm} class is a \LaTeX{} document template jointly maintained by
 
 \begin{itemize}
     \item \textbf{Typography.} Body text is set in Palatino (\texttt{tgpagella} + \texttt{mathpazo}); math symbols inherit the same family for a consistent look; monospace text uses Inconsolata.
-    \item \textbf{Color theme.} A curated palette (\texttt{odlblue}, \texttt{odlbg}) is predefined in the class file. Hyperlinks, citations, and URLs are uniformly colored.
+    \item \textbf{Color theme.} A curated palette (\texttt{accent}, \texttt{bglight}) is predefined in the class file via an extensible color-scheme system (\verb|\definescheme|/\verb|\usescheme|). Hyperlinks, citations, and URLs are uniformly colored.
     \item \textbf{Code listings.} Four ready-to-use \texttt{lstlisting} styles are provided: \texttt{python}, \texttt{json}, \texttt{bash}, and \texttt{prompt}, plus a \texttt{promptbox} tcolorbox environment for LLM-style prompts.
     \item \textbf{Math support.} Full AMS math environments are available, including inline formulas, display equations, aligned multi-line equations, piecewise functions, and matrices.
     \item \textbf{Floats.} Standard \texttt{figure} and \texttt{table} environments are supported, with sub-figures via \texttt{subcaption} and publication-quality tables via \texttt{booktabs}.
     \item \textbf{Bibliography.} References are managed by \texttt{natbib} + \texttt{IEEEtran2.bst}, producing numeric citations (\eg \cite{vaswani2017attention}) compatible with IEEE style.
 \end{itemize}
 
-% ===== Mathematical Equations =====
+% ===== Mathematical Equations / 数学公式 =====
 
 \section{Mathematical Equations}
 \label{section:math}
@@ -264,7 +295,7 @@ A $3 \times 3$ rotation matrix about the $z$-axis is:
 
 Cross-references are produced with \verb|\Cref{}|, \eg \Cref{eq:attention,eq:multihead,eq:relu,eq:rotation}.
 
-% ===== Figures =====
+% ===== Figures / 图片 =====
 
 
 \section{Figures}
@@ -306,7 +337,7 @@ When multiple related images need side-by-side comparison, use the \texttt{subfi
     \label{fig:subfig}
 \end{figure}
 
-% ===== Tables =====
+% ===== Tables / 表格 =====
 
 \section{Tables}
 \label{section:tables}
@@ -319,7 +350,7 @@ The \texttt{booktabs} package (loaded by the class) provides three-rule academic
     \centering
     \begin{tabular}{lcccccc}
         \toprule
-        \multirow{2.5}{*}{\textbf{Model}} & % each \cmidrule with take 0.5 row height
+        \multirow{2.5}{*}{\textbf{Model}} & % each \cmidrule takes 0.5 row height / 每条 \cmidrule 占 0.5 行高
         \multirow{2.5}{*}{\textbf{Params}} &
         \multicolumn{2}{c}{\textbf{Reasoning}} &
         \multicolumn{2}{c}{\textbf{QA}} &
