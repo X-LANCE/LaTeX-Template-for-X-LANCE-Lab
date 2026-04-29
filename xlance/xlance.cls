@@ -419,16 +419,19 @@
 % Title Box / 标题框
 % =============================================================================
 
+\newlength{\xlance@headerlogoheight}
+\setlength{\xlance@headerlogoheight}{1.0cm}
+
 \newcommand{\mymaketitle}{%
     \tcbset{enhanced}
-    \tcbset{colframe=themecolor@2}
+    \tcbset{colframe=themecolor@2!25}
     \tcbset{boxrule=1pt}
     \tcbset{left=0.5cm}
     \tcbset{right=0.5cm}
     \tcbset{top=0.5cm}
     \tcbset{bottom=0.5cm}
     \tcbset{arc=10pt}
-    \tcbset{colback=themecolor@5!50}
+    \tcbset{colback=themecolor@5!40}
     \tcbset{before skip=0pt}
     \tcbset{grow to left by=1.5pt}
     \tcbset{grow to right by=1.5pt}
@@ -436,16 +439,6 @@
     \setlength{\parindent}{0cm}
     \setlength{\parskip}{0.5cm}
     {
-        \centering
-        \if@xlance@opendfm
-        \includegraphics[height=1.6cm, trim=50 50 50 50, clip]{xlance/assets/logos/XLANCE.png}%
-        \hspace{1.5cm}%
-        \includegraphics[height=1.6cm, trim=30 30 30 30, clip]{xlance/assets/logos/OpenDFM.png}%
-        \else
-        \hspace{6cm}%
-        \includegraphics[height=1.6cm, trim=50 50 50 50, clip]{xlance/assets/logos/XLANCE.png}%
-        \fi
-        \vskip 0.5cm
         \setlength{\parskip}{0cm}
         \raggedright
         \nohyphens
@@ -514,12 +507,28 @@
 % Page Styles / 页面样式
 % =============================================================================
 
-% --- First page: no header, page number at bottom center ---
-% --- 首页：无页眉，页码居底部中央 ---
+% --- First page: logos in header, page number at bottom center ---
+% --- 首页：页眉显示 logo，页码居底部中央 ---
 \fancypagestyle{firstpage}{%
     \fancyhf{}%
+    \if@xlance@opendfm
+        \fancyhead[L]{%
+            \includegraphics[height=\xlance@headerlogoheight]{xlance/assets/logos/XLANCE.png}%
+            \hspace{0.4cm}%
+            \includegraphics[height=\xlance@headerlogoheight]{xlance/assets/logos/SII.png}%
+            \hspace{0.4cm}%
+            \includegraphics[height=\xlance@headerlogoheight]{xlance/assets/logos/SZLab.png}%
+        }%
+        \fancyhead[R]{%
+            \includegraphics[height=\xlance@headerlogoheight, trim=30 30 30 30, clip]{xlance/assets/logos/OpenDFM.png}%
+        }%
+    \else
+        \fancyhead[L]{%
+            \includegraphics[height=\xlance@headerlogoheight]{xlance/assets/logos/XLANCE_full.png}%
+        }%
+    \fi
     \fancyfoot[C]{\thepage}%
-    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\headrulewidth}{0.4pt}%
 }
 
 % --- Body pages: title in header ---
@@ -592,7 +601,7 @@
 \hfuzz=5pt
 \setlength{\emergencystretch}{3em}
 \hfuzz=2pt
-\setlength{\headheight}{28pt}
+\setlength{\headheight}{34pt}
 \allowdisplaybreaks
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

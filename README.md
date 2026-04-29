@@ -1,11 +1,14 @@
 # LaTeX Template for X-LANCE Pre-Prints
-## Version: 0.2.3-20260304
+## Version: 0.2.4-20260429
 
 ## 使用方式
 - 方法一：下载到本地之后，导入到Overleaf或者本地LaTeX编辑器中。
 - 方法二：使用 ![Overleaf](https://cn.overleaf.com/read/ctjjjtdcgmwm#16764e) 链接进行预览，并点击左上角“文件”-“复制一份”到自己的Overleaf项目中。
 
 ## 更新日志
+### v0.2-4-2026-0429
+修改两种色彩主题下logo的排版
+
 ### v0.2.3-20260304
 新增README.md
 
