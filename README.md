@@ -1,6 +1,10 @@
 # LaTeX Template for X-LANCE Pre-Prints
 ## Version: 0.2.4-20260429
 
+## 样例
+![](./figures/xlance_example.png)
+![](./figures/opendfm_example.png)
+
 ## 使用方式
 - 方法一：下载到本地之后，导入到Overleaf或者本地LaTeX编辑器中。
 - 方法二：使用 ![Overleaf](https://cn.overleaf.com/read/ctjjjtdcgmwm#16764e) 链接进行预览，并点击左上角“文件”-“复制一份”到自己的Overleaf项目中。
