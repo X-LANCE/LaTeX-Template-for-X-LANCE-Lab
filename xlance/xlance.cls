@@ -1,7 +1,7 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LaTeX Style Template for X-LANCE pre-prints
-% Version: 0.2.2
-% Update date: 20260304
+% Version: 0.2.5
+% Update date: 20260529
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % =============================================================================
@@ -420,7 +420,7 @@
 % =============================================================================
 
 \newlength{\xlance@headerlogoheight}
-\setlength{\xlance@headerlogoheight}{1.0cm}
+\setlength{\xlance@headerlogoheight}{0.8cm}
 
 \newcommand{\mymaketitle}{%
     \tcbset{enhanced}

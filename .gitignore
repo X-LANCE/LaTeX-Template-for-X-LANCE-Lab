@@ -1,2 +1,13 @@
 .codex
 xlance/assets/log
+scripts/
+.texlive/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+example.pdf
