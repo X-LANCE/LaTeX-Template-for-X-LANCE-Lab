@@ -1,5 +1,5 @@
 # LaTeX Template for X-LANCE Pre-Prints
-## Version: 0.2.5-20260529
+## Version: 0.2.6-20260530
 
 ## 样例
 ![](./figures/xlance_example.png)
@@ -10,6 +10,9 @@
 - 方法二：使用 ![Overleaf](https://cn.overleaf.com/read/ctjjjtdcgmwm#16764e) 链接进行预览，并点击左上角“文件”-“复制一份”到自己的Overleaf项目中。
 
 ## 更新日志
+
+### v0.2.6-20250530
+调宽author list和affiliation list的行间距
 
 ### v0.2.5-20260529
 修改opendfm模板的首页页眉

@@ -1,7 +1,7 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LaTeX Style Template for X-LANCE pre-prints
-% Version: 0.2.5
-% Update date: 20260529
+% Version: 0.2.6
+% Update date: 20260530
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % =============================================================================
@@ -331,7 +331,7 @@
 
 \newcommand\affiliationlist{}
 \newcommand\affiliationformat[2][]{{\normalsize $^{#1}$#2}}
-\newcommand\affiliation[2][]{\addtolist[#1]{#2}{\affiliationlist}{\affiliationformat}{, }}
+\newcommand\affiliation[2][]{\addtolist[#1]{#2}{\affiliationlist}{\affiliationformat}{}}
 
 \newcommand\contributionlist{}
 \newcommand\contributionformat[2][]{{\normalsize $^{#1}$#2}}
@@ -449,10 +449,16 @@
         }
         \vskip 0.2cm
         %
-        \authorlist\par
+        {
+            \setstretch{1.25}
+            \authorlist\par
+        }
         \vskip 0.2cm
         %
-        \affiliationlist\par
+        {
+            \setstretch{1.25}
+            \affiliationlist\par
+        }
         %
         \begin{center}\contributionlist\end{center}
         %
